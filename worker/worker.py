@@ -36,4 +36,4 @@ while True:
     send_to_mongo("Paris")
     send_to_mongo("Rennes")
     send_to_mongo("Lyon")
-    time.sleep(300) # wait 5 mins
+    time.sleep(60) # wait 1 min
