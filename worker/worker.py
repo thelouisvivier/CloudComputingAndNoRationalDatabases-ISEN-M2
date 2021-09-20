@@ -3,6 +3,7 @@ import time
 from bicycle_stations_fetcher.get_api_functions import *
 
 
+# Fetch data from wanted endpoint and populate mongo DB
 def send_to_mongo(city):
     if city == "Lille":
         print("Fetching Lille...")
@@ -30,10 +31,19 @@ def send_to_mongo(city):
         # now send it
         print("Successfully fetched and moved to mongo")
 
+    else:
+        print("Wrong city endpoint given")
+        print("Received : " + city)
 
-while True:
-    send_to_mongo("Lille")
-    send_to_mongo("Paris")
-    send_to_mongo("Rennes")
-    send_to_mongo("Lyon")
-    time.sleep(60) # wait 1 min
+
+# worker wich process given city endpoints
+def worker():
+    print("worker started")
+    while True:
+        print("######################")
+        send_to_mongo("Lille")
+        send_to_mongo("Paris")
+        send_to_mongo("Rennes")
+        send_to_mongo("Lyon")
+        print("######################")
+        time.sleep(60)  # wait 1 min
