@@ -7,28 +7,24 @@ from bicycle_stations_fetcher.get_api_functions import *
 def send_to_mongo(city):
     if city == "Lille":
         print("Fetching Lille...")
-        json = get_vlille()
-        # now send it
+        get_lille()
         print("Successfully fetched and moved to mongo")
 
     elif city == "Paris":
         print("Fetching Paris...")
-        json = get_vparis()
-        # now send it
+        get_paris()
         print("Successfully fetched and moved to mongo")
 
     elif city == "Rennes":
         print("Fetching Rennes...")
-        json_geo = get_vrennes_geo()
-        json_availability = get_vrennes_availability
-        # now send it
+        get_rennes_geo()
+        get_rennes_availability()
         print("Successfully fetched and moved to mongo")
 
     elif city == "Lyon":
         print("Fetching Lyon...")
-        json_geo = get_vlyon_availability
-        json_availability = get_vlyon_geo
-        # now send it
+        get_lyon_availability()
+        get_lyon_geo()
         print("Successfully fetched and moved to mongo")
 
     else:
