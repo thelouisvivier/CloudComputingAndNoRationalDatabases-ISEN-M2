@@ -13,19 +13,18 @@ def send_to_mongo(city):
     elif city == "Paris":
         print("Fetching Paris...")
         get_paris()
-        # now send it
         print("Successfully fetched and moved to mongo")
 
     elif city == "Rennes":
         print("Fetching Rennes...")
-        get_rennes()
-        # now send it
+        get_rennes_geo()
+        get_rennes_availability()
         print("Successfully fetched and moved to mongo")
 
     elif city == "Lyon":
         print("Fetching Lyon...")
-        get_lyon()
-        # now send it
+        get_lyon_availability()
+        get_lyon_geo()
         print("Successfully fetched and moved to mongo")
 
     else:
