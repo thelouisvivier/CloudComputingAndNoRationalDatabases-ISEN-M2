@@ -3,7 +3,7 @@ import json
 
 # Lille request
 from bicycle_stations_fetcher.Station import Station
-from bicycle_stations_fetcher.database_insert import insert_documents, update_document
+from bicycle_stations_fetcher.database_insert import insert_documents
 
 
 def get_lille():
