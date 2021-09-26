@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv, find_dotenv
+from pymongo import GEO2D
 
 load_dotenv(find_dotenv())
 
@@ -19,4 +20,11 @@ def get_database():
 def insert_documents(documents, collection):
     dbname = get_database()
     collection_name = dbname[collection]
+    collection_name.create_index([("coordinates", GEO2D)])
     collection_name.insert_many(documents)
+
+
+def update_document(station_id, collection, data):
+    dbname = get_database()
+    collection_name = dbname[collection]
+    collection_name.update_one({"station_id": station_id}, {"$set": data})
