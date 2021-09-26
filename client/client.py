@@ -1,5 +1,5 @@
 from threading import Thread
-from pymongo import MongoClient
+from pymongo import MongoClient, GEO2D
 
 from bicycle_stations_fetcher.database_insert import get_database
 from worker.worker import worker
@@ -23,20 +23,11 @@ while True:
 
     # Recap given parameters
     print("city is: " + city)
-    print("long/lat " + long + "/" + lat)
+    print("long/lat " + str(long) + "/" + str(lat))
 
     # Process on mongo and show result
-    db.collection.create_index('coordinates', name="2dsphere")
-    query = db["fr-lille"].find({
-        "coordinates": {
-            "$near": {
-                "$geometry": {
-                    type: "Point",
-                    "coordinates": [long, lat]
-                },
-            }
-        }
-    })
+    query = db["fr-lille"].find({"coordinates": {"$near": [int(long), int(lat)]}}).limit(3)
 
     for element in query:
         print(element)
+
