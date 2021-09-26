@@ -17,14 +17,12 @@ def send_to_mongo(city):
 
     elif city == "Rennes":
         print("Fetching Rennes...")
-        get_rennes_geo()
-        get_rennes_availability()
+        get_rennes()
         print("Successfully fetched and moved to mongo")
 
     elif city == "Lyon":
         print("Fetching Lyon...")
-        get_lyon_availability()
-        get_lyon_geo()
+        get_lyon()
         print("Successfully fetched and moved to mongo")
 
     else:
