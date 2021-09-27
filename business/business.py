@@ -57,15 +57,19 @@ while True:
     elif action == "deactivate":
         city = get_city()
         long = input("Longitude : ")
-        lat = input("Longitude : ")
-        length = input("Area size : ")
+        lat = input("Latitude : ")
+        length = input("Area size (in coordinates precision) : ")
 
-        query = db[city].update_many({"coordinates": {"$near": [float(long), float(lat)]}, "$maxDistance": length},
-                                     {"$set": {"available": False}})
-
+        query = db[city].find({"coordinates": {"$near": [float(long), float(lat)], "$maxDistance": float(length)}})
+        to_deactivate = []
         for element in query:
-            print(element)
+            print("La station " + element['name'] + " va être désactivée")
+            to_deactivate.append(element['station_id'])
+        for station_id in to_deactivate:
+            new_value = {"$set": {'available': False}}
+            db[city].update_one({'station_id': station_id}, new_value)
+
 
 
     else:
-        print("Wrong action !")
+            print("Wrong action !")
