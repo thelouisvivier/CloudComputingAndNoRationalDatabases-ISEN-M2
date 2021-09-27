@@ -26,19 +26,33 @@ while True:
     if action == "find":
         city = get_city()
         name = input("Enter name  : ")
-        query = db[city].find({"name": name}).limit(1)
+        query = db[city].find({"name": name})
 
-        if len(query) > 0:
-            for element in query:
-                print(element)
-        else:
-            print("No result found\n")
+        for element in query:
+            print(element)
 
     elif action == "update":
-        print("update")
+        city = get_city()
+        station_id = input("Enter station id  : ")
+        query_filter = {"station_id": int(station_id)}
+        query = db[city].find(query_filter).limit(1)
+
+        for element in query:
+            print(element)
+
+        field = input("Field to update : ")
+        update = input("Update with : ")
+        new_values = {"$set": {field: update}}
+        query_update = db[city].update_one(query_filter, new_values)
 
     elif action == "delete":
-        print("delete")
+        city = get_city()
+        station_id = input("Enter station id  : ")
+        query = db[city].delete_many({"station_id": int(station_id)})
+        if query.acknowledged:
+            print("Entry deleted if exists")
+        else:
+            print("Failed to delete entry, maybe it doesn't exists")
 
     elif action == "deactivate":
         print("deactivate")
