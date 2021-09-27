@@ -55,7 +55,17 @@ while True:
             print("Failed to delete entry, maybe it doesn't exists")
 
     elif action == "deactivate":
-        print("deactivate")
+        city = get_city()
+        long = input("Longitude : ")
+        lat = input("Longitude : ")
+        length = input("Area size : ")
+
+        query = db[city].update_many({"coordinates": {"$near": [float(long), float(lat)]}, "$maxDistance": length},
+                                     {"$set": {"available": False}})
+
+        for element in query:
+            print(element)
+
 
     else:
         print("Wrong action !")
