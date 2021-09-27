@@ -1,5 +1,6 @@
 # Get and return city name
-def get_city(city):
+def get_city():
+    city = input("Enter city (Lille/Paris/Rennes/Lyon) : ")
     if city == "Lille":
         name = "fr-lille"
     elif city == "Paris":

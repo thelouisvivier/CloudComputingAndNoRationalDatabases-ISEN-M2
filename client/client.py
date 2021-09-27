@@ -7,14 +7,13 @@ from bicycle_stations_fetcher.get_city import get_city
 db = get_database()
 
 # Get needed infos
-city = input("Enter city (Lille/Paris/Rennes/Lyon) : ")
+city = get_city()
 long = input("Enter longitude : ")
 lat = input("Enter latitude : ")
 
 # Recap given parameters
 print("city is: " + city)
 print("long/lat " + str(long) + "/" + str(lat))
-city = get_city(city)
 # Process on mongo and show result
 query = db[city].find({"coordinates": {"$near": [float(long), float(lat)]}, "available": True}).limit(3)
 
