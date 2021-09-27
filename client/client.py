@@ -16,7 +16,7 @@ print("city is: " + city)
 print("long/lat " + str(long) + "/" + str(lat))
 city = get_city(city)
 # Process on mongo and show result
-query = db[city].find({"coordinates": {"$near": [int(long), int(lat)]}, "available": True}).limit(3)
+query = db[city].find({"coordinates": {"$near": [float(long), float(lat)]}, "available": True}).limit(3)
 
 print("##########################################")
 print("Stations disponibles trouvées près de votre position :")
